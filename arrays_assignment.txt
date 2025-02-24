@@ -1,0 +1,186 @@
+Exercise 1: Define Typed Arrays
+Define the following arrays with proper types and initialize them with values.
+
+a) An array of numbers.
+b) An array of strings.
+c) An array of booleans.
+d) A mixed array containing numbers and strings.
+
+answers : 
+a) let numbers_arr: number[] = [1, 2, 3, 4, 5];
+b) let strings_arr: string[] = ["apple", "banana", "cherry"];
+c) let booleans_arr: boolean[] = [true, false, true];
+d) let mixed_arr: (number | string)[] = [1, "apple", 2, "banana"];
+
+Exercise 2: Array Manipulation 
+Perform the following operations on the given array:
+
+a) Add "grapes" at the end.
+b) Remove the first element.
+c) Insert "pineapple" at index 2.
+d) Reverse the array.
+
+answers : 
+let fruits: string[] = ["apple", "banana", "mango"];
+
+a) fruits.push("grapes");  // Add "grapes" at the end
+b) fruits.shift();  // Remove the first element
+c) fruits.splice(2, 0, "pineapple");  // Insert "pineapple" at index 2
+d) fruits.reverse();  // Reverse the array
+
+console.log(fruits);  
+output: [ 'grapes', 'pineapple', 'banana' ]
+
+Exercise 3: Map, Filter, and Reduce
+Using the given array, perform the following:
+
+a)Create a new array that doubles each number.
+b)Filter out numbers greater than 50.
+c)Find the sum of all numbers.
+
+let numbers: number[] = [10, 20, 30, 40, 50, 60];
+
+Answers : 
+a) let doubled = numbers.map(num => num * 2);
+b) let filtered = numbers.filter(num => num > 50);
+c) 
+let sum = 0 
+   for(let i = 0; i < numbers.length; i++) 
+{
+    sum += numbers[i];  
+}
+
+console.log("Doubled numbers:", doubled);
+console.log("Filtered numbers:", filtered);
+console.log("Sum:", sum);
+
+Exercise 4: Find and FindIndex
+Using the given array:
+
+Find the first number greater than 25.
+Get the index of the number 40.
+
+let values: number[] = [10, 20, 30, 40, 50];
+
+// Your code here
+console.log("First number > 25:", result);
+console.log("Index of 40:", index);
+
+answers : 
+const big_nums = numbers.find( (i) => i > 25 ) 
+const index_40 = numbers.findIndex( (i) => i == 40 ) 
+
+output : 
+30 
+3 
+
+Exercise 5: Sorting an Array
+Sort the following array in ascending and descending order.
+
+let scores: number[] = [55, 23, 87, 12, 99, 38];
+
+// Your code here
+
+console.log("Ascending order:", ascending);
+console.log("Descending order:", descending);
+
+answers : 
+
+number.sort((a,b) => a-b) //output : [12,23,38,55,87,99]
+number.sort((a,b) => b-a) //output : [99,87,55,38,23,12]
+
+Exercise 6: Tuple Types
+Create a tuple that holds the following information about a student:
+Name (string)
+Age (number)
+Enrolled (boolean)
+Then, update the age of the student.
+
+let student: [string, number, boolean] = ["John", 21, true];
+// Your code here
+console.log(student);
+
+answers : 
+student[1] = 25 //output : ["John" , 25 , true ] 
+
+Exercise 7: Working with includes() and some()
+Given an array of roles, check:
+If "Admin" exists in the array.
+If at least one role starts with "Super".
+
+let roles: string[] = ["User", "Editor", "Admin", "Moderator"];
+
+console.log("Contains Admin:", hasAdmin);
+console.log("Has Super role:", hasSuper);
+
+answers : 
+let hasAdmin = roles.includes("Admin") //true
+let hasSuper = roles.startsWith("Super") //false 
+
+
+
+Exercise 8: Flattening an Array
+Flatten the following nested array using the flat() method.
+
+let nestedArray: (number | number[])[] = [1, [2, 3], [4, [5, 6]]];
+console.log(flattenedArray);
+
+answers : 
+let nestedArray: (number | number[])[] = [1, [2, 3], [4, [5, 6]]];
+let flattenedArray = nestedArray.flat(Infinity);
+//output: [1,2,3,4,5,6]
+
+Exercise 9: Merging and Removing Duplicates
+Merge the two arrays and remove duplicates.
+
+let arr1: number[] = [1, 2, 3, 4];
+let arr2: number[] = [3, 4, 5, 6];
+
+console.log(uniqueArray);
+
+answers : 
+
+let new_arr = [...arr1]
+
+for (let i = 0; i < arr2.length; i++) {
+    if (new_arr.indexOf(arr2[i]) === -1) {
+        new_arr.push(arr2[i]);
+    }
+}
+
+//output : [1,2,3,4,5,6]
+
+Exercise 10: Interface with Arrays
+Define an interface Employee with the following properties:
+
+name (string)
+age (number)
+position (string)
+Then, create an array of employees and filter those older than 30.
+
+interface Employee {
+    name: string;
+    age: number;
+    position: string;
+}
+
+// Create an array of employees and filter employees older than 30
+
+console.log(filteredEmployees);
+
+answers: 
+
+let employees: Employee[] = [
+    { name: "Alice", age: 25, position: "Developer" },
+    { name: "Bob", age: 35, position: "Manager" },
+    { name: "Charlie", age: 40, position: "CEO" }
+];
+let filteredEmployees = employees.filter(emp => emp.age > 30);
+
+
+
+
+
+
+
+
