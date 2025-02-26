@@ -1,0 +1,198 @@
+Basic TypeScript Problems
+1) Variables & Types
+Problem:
+ Declare the following variables with appropriate TypeScript types:
+A string variable userName with a value "John Doe".
+A number variable age with a value 25.
+A boolean variable isStudent with a value true.
+Bonus: Try to assign a different type to these variables and see what happens!
+
+Answer :
+a) username : string = "John Doe"
+b) age : number = 25
+c) isStudent : boolean = true
+
+
+2) Functions & Type Annotations
+Problem:
+ Write a function add that takes two numbers as arguments and returns their sum.
+typescriptCopyEditfunction add(a, b) {
+   return a + b;
+}
+Fix this function by adding TypeScript type annotations.
+
+Answer : 
+typescriptCopyEditfunction add(a: number, b:number):number {
+   return a + b;
+}
+
+3) Function with Optional Parameters
+Problem:
+ Modify the function below to make the second parameter optional:
+typescriptCopyEditfunction greet(name: string, message: string) {
+    return `${message}, ${name}!`;
+}
+If the message is not provided, default to "Hello".
+
+Answer : 
+typescriptCopyEditfunction greet(name: string, message?: string) {
+    return `${message ?? "hello"}, ${name}!`;
+}
+
+4) Union Types
+Problem:
+ Define a function displayId that accepts either a number or a string as an argument and logs it.
+typescriptCopyEditfunction displayId(id) {
+    console.log(`ID: ${id}`);
+}
+Fix this function using union types.
+
+Answer : 
+function displayId(id : number | string ) {
+    console.log(`ID: ${id}`);
+}
+
+5)  Arrays & Tuples
+Problem:
+Declare an array numbers that only holds numbers.
+Create a tuple person that contains a string (name) and a number (age).
+Example:
+typescriptCopyEdit// numbers: [10, 20, 30]// person: ["Alice", 30]
+
+Answer : 
+let num_arr : number[] = []
+let person : [string , number]
+
+6) Interfaces
+Problem:
+ Define an interface Person with the following properties:
+name (string)
+age (number)
+email (string)
+Create a variable user that implements this interface.
+
+Answer : 
+interface Person {
+  name: string;
+  age: number;
+ email: string;
+}
+
+const user : Person = {
+    username: "qwerty",
+    email: "qwerty@gmail.com"
+};
+
+7) Type Aliases
+Problem:
+ Create a type alias Employee that includes:
+id (number)
+name (string)
+role ("admin" | "manager" | "employee")
+Define an employee variable of type Employee.
+
+Answer : 
+
+type IdNumber = number;
+type NameString = string;
+type Role = "admin" | "manager" | "employee"; // Literal types for role
+
+type Employee = {
+  id: IdNumber;
+  name: NameString;
+  role: Role;
+};
+
+const employee: Employee = {
+  id: 1,
+  name: "Alice",
+  role: "admin"
+};
+console.log(employee);
+
+8) Enum
+Problem:
+ Define an enum Color with values: "Red", "Green", and "Blue".
+ Create a variable favoriteColor of type Color.
+
+Answer : 
+
+enum Color {
+  Red = "Red",
+  Green = "Green",
+  Blue = "Blue"
+}
+let favoriteColor: Color = Color.Green;
+console.log(favoriteColor)
+
+9) Readonly & Partial
+Problem:
+Create a readonly object for user information.
+Use Partial<T> to make a type where all properties are optional.
+Example:
+typescriptCopyEditinterface User {
+   id: number;
+   name: string;
+   email: string;
+}
+const user: Readonly<User> = { id: 1, name: "Alice", email: "alice@example.com" };// user.name = "Bob"; ❌ This should give an error!let newUser: Partial<User> = { name: "Bob" }; // ✅ Allowed
+
+Answer : 
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const user: Readonly<User> = {
+  id: 1,
+  name: "Alice",
+  email: "alice@example.com"
+};
+
+let newUser: Partial<User> = {
+  name: "Bob"
+};
+console.log(newUser);
+
+
+
+10) Classes in TypeScript
+Problem:
+ Create a class Car with the following properties:
+brand (string)
+model (string)
+year (number)
+Add a method getCarInfo() that returns a string like:
+"Toyota Corolla (2020)"
+
+Answer : 
+
+class Car {
+  brand: string;
+  model: string;
+  year: number;
+
+  constructor(brand: string, model: string, year: number) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  getCarInfo(): string {
+    return `${this.brand} ${this.model} (${this.year})`;
+  }
+}
+
+const myCar = new Car("Toyota", "Corolla", 2020);
+console.log(myCar.getCarInfo());
+
+
+
+
+
+
+
+
+
