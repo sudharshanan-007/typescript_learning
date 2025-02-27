@@ -1,0 +1,289 @@
+Exercise 1: Basic Abstract Class
+
+Create an abstract class Shape with:
+  An abstract method calculateArea(): number
+  A constructor that takes color as a property
+  A method getColor(): string that returns the color
+  Then, create two subclasses Circle and Rectangle that implement calculateArea().
+ 
+Task
+  Implement Shape, Circle, and Rectangle
+  Create instances and call the methods
+
+
+Answer : 
+
+abstract class Shape {
+  constructor(protected color: string) {}
+
+  abstract calculateArea(): number;
+
+  getColor(): string {
+    return this.color;
+  }
+}
+
+class Circle extends Shape {
+  constructor(color: string, private radius: number) {
+    super(color);
+  }
+
+  calculateArea(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(color: string, private width: number, private height: number) {
+    super(color);
+  }
+
+  calculateArea(): number {
+    return this.width * this.height;
+  }
+}
+
+// Testing
+const circle = new Circle("Red", 5);
+console.log(circle.getColor(), "Area:", circle.calculateArea());
+
+const rectangle = new Rectangle("Blue", 4, 6);
+console.log(rectangle.getColor(), "Area:", rectangle.calculateArea());
+
+
+Exercise 2: Implementing an Interface
+
+Create an interface Vehicle with:
+    A property speed: number
+    A method move(): void
+    Then, implement Vehicle in two classes: Car and Bicycle.
+ 
+Task: 
+    Implement Vehicle, Car, and Bicycle
+    Create instances and call the move() method
+
+Answer : 
+
+interface Vehicle {
+  speed: number;
+  move(): void;
+}
+
+class Car implements Vehicle {
+  constructor(public speed: number) {}
+
+  move(): void {
+    console.log(`Car is moving at ${this.speed} km/h`);
+  }
+}
+
+class Bicycle implements Vehicle {
+  constructor(public speed: number) {}
+
+  move(): void {
+    console.log(`Bicycle is moving at ${this.speed} km/h`);
+  }
+}
+
+// Testing
+const car = new Car(80);
+car.move();
+
+const bicycle = new Bicycle(20);
+bicycle.move();
+
+Exercise 3: Combining Abstract Class and Interface
+
+Create an interface Flyable with:
+    A method fly(): void
+    Create an abstract class Bird with:
+    A property name: string
+    A method eat(): void
+Then, create two classes Eagle and Sparrow that extend Bird and implement Flyable.
+ 
+Task: 
+Implement Bird and Flyable
+Create Eagle and Sparrow and call eat() and fly()
+
+Answer : 
+
+interface Flyable {
+  fly(): void;
+}
+
+abstract class Bird {
+  constructor(protected name: string) {}
+
+  eat(): void {
+    console.log(`${this.name} is eating`);
+  }
+}
+
+class Eagle extends Bird implements Flyable {
+  fly(): void {
+    console.log(`${this.name} is flying high`);
+  }
+}
+
+class Sparrow extends Bird implements Flyable {
+  fly(): void {
+    console.log(`${this.name} is flying low`);
+  }
+}
+
+// Testing
+const eagle = new Eagle("Eagle");
+eagle.eat();
+eagle.fly();
+
+const sparrow = new Sparrow("Sparrow");
+sparrow.eat();
+sparrow.fly();
+
+
+Exercise 4: Interface Inheritance
+
+Create two interfaces:
+    Person with name: string and speak(): void
+    Employee (extends Person) with salary: number and work(): void
+    Create a class Developer that implements Employee.
+ 
+Task
+    Implement Person, Employee, and Developer
+    Create an instance and call speak() and work()
+
+Answer : 
+
+interface Person {
+  name: string;
+  speak(): void;
+}
+
+interface Employee extends Person {
+  salary: number;
+  work(): void;
+}
+
+class Developer implements Employee {
+  constructor(public name: string, public salary: number) {}
+
+  speak(): void {
+    console.log(`${this.name} says hello!`);
+  }
+
+  work(): void {
+    console.log(`${this.name} is coding`);
+  }
+}
+
+// Testing
+const dev = new Developer("Alice", 70000);
+dev.speak();
+dev.work();
+
+
+=========================================================================
+
+Advanced example
+ 
+Exercise 1: Abstract Class for Banking System
+
+Create an abstract class BankAccount with:
+ 
+Protected properties: accountNumber, balance
+
+Constructor to initialize accountNumber and balance
+
+Methods:
+
+deposit(amount: number): void (increases balance)
+
+Abstract method withdraw(amount: number): boolean (returns true if successful, false otherwise)
+
+Method getBalance(): number
+
+Then, create two subclasses SavingsAccount and CheckingAccount that:
+ 
+Implement withdraw()
+
+SavingsAccount should have a withdrawal limit
+
+CheckingAccount should allow overdraft up to a certain limit
+
+Tasks
+
+Implement BankAccount, SavingsAccount, and CheckingAccount
+
+Create instances and test deposit/withdraw functions
+
+Exercise 2: Interface for Payment System
+
+Create an interface PaymentMethod with:
+ 
+A method pay(amount: number): void
+
+A method refund(amount: number): void
+
+Then, create three classes CreditCard, DebitCard, and UPI that:
+ 
+Implement PaymentMethod
+
+Each class should have a balance and implement pay() and refund()
+
+Tasks
+
+Implement PaymentMethod, CreditCard, DebitCard, and UPI
+
+Create instances and simulate payments & refunds
+
+Exercise 3: Combining Abstract Class and Interface
+
+Create:
+ 
+Abstract class PaymentGateway with:
+ 
+A method processPayment(amount: number): void
+
+A method processRefund(amount: number): void
+
+An abstract method validateTransaction(transactionId: string): boolean
+
+Interface SecurePayment with:
+ 
+Method authenticateUser(userId: string): boolean
+
+Then, create a class PayPal that:
+ 
+Extends PaymentGateway
+
+Implements SecurePayment
+
+Implements validateTransaction() and authenticateUser()
+
+Tasks
+
+Implement PaymentGateway, SecurePayment, and PayPal
+
+Create an instance of PayPal and test methods
+
+Exercise 4: Multiple Interface Implementation
+
+Create:
+ 
+Interface Loan with applyForLoan(amount: number): void
+
+Interface Insurance with applyForInsurance(policy: string): void
+
+Then, create a class Customer that:
+ 
+Implements Loan and Insurance
+
+Stores loan and insurance details in properties
+
+Tasks
+
+Implement Loan, Insurance, and Customer
+
+Create an instance of Customer and test loan & insurance applications
+
+ 
