@@ -1,0 +1,99 @@
+Basic Utility Types
+1. Partial
+Given the following interface:
+typescriptCopyEditinterface User {
+  id: number;
+  name: string;
+  email: string;
+}
+Define a function updateUser that takes an object of type Partial<User> and updates the user information.
+Answer :
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+function updateUser(user: User, updates: Partial<User>): User {
+  return { ...user, ...updates };
+}
+const user: User = { id: 24, name: "qwerty", email: "qwerty@gmail.com" };
+const updatedUser = updateUser(user, { name: "abc" });
+console.log(updatedUser);
+
+2. Required
+Convert the following UserProfile type to ensure that all properties are mandatory:
+typescriptCopyEditinterface UserProfile {
+  id?: number;
+  name?: string;
+  age?: number;
+}
+Use the appropriate utility type.
+Answer:
+interface UserProfile {
+  id?: number;
+  name?: string;
+  age?: number;
+}
+type CompleteUserProfile = Required<UserProfile>;
+const user: CompleteUserProfile = { id: 24, name: "qwerty", age: 25 }; // Now all properties are required
+3. Readonly
+Using the Readonly utility type, define a variable config that ensures the following object cannot be modified:
+typescriptCopyEditconst config = {
+  apiKey: "12345",
+  timeout: 5000
+};
+Answer:
+const config: Readonly<{
+  apiKey: string;
+  timeout: number;
+}> = {
+  apiKey: "12345",
+  timeout: 5000
+};
+Advanced Utility Types
+4. Pick
+Given the following interface:
+typescriptCopyEditinterface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}
+Create a new type ProductSummary that only includes id, name, and price.
+Answer:
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}
+type ProductSummary = Pick<Product, 'id' | 'name' | 'price'>;
+const summary: ProductSummary = {
+  id: 24,
+  name: "computer",
+  price: 2000
+};
+5. Omit
+Using Omit, create a new type UserWithoutEmail that includes all properties from User except email.
+Answer:
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+type UserWithoutEmail = Omit<User, 'email'>;
+const userWithoutEmail: UserWithoutEmail = {
+  id: 24,
+  name: "Sudhar"
+};
+6. Record
+Create a UserRoles type that maps user IDs (numbers) to role names (strings).
+Answer:
+type UserRoles = {
+  [userId: number]: string;
+};
+const roles: UserRoles = {
+  1: "Admin",
+  2: "Editor",
+  3: "Viewer"
+};
