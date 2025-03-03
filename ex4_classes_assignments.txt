@@ -216,6 +216,64 @@ Implement BankAccount, SavingsAccount, and CheckingAccount
 
 Create instances and test deposit/withdraw functions
 
+Answer : 
+
+abstract class BankAccount {
+  protected balance: number;
+
+  constructor(protected accountNumber: string, initialBalance: number) {
+    this.balance = initialBalance;
+  }
+
+  deposit(amount: number): void {
+    this.balance += amount;
+    console.log(`Deposited: ${amount}, New Balance: ${this.balance}`);
+  }
+
+  abstract withdraw(amount: number): boolean;
+
+  getBalance(): number {
+    return this.balance;
+  }
+}
+
+class SavingsAccount extends BankAccount {
+  private withdrawalLimit = 1000;
+
+  withdraw(amount: number): boolean {
+    if (amount <= this.balance && amount <= this.withdrawalLimit) {
+      this.balance -= amount;
+      console.log(`Withdrawn: ${amount}, Remaining Balance: ${this.balance}`);
+      return true;
+    }
+    console.log("Withdrawal failed: Limit exceeded or insufficient balance");
+    return false;
+  }
+}
+
+class CheckingAccount extends BankAccount {
+  private overdraftLimit = 500;
+
+  withdraw(amount: number): boolean {
+    if (amount <= this.balance + this.overdraftLimit) {
+      this.balance -= amount;
+      console.log(`Withdrawn: ${amount}, Remaining Balance: ${this.balance}`);
+      return true;
+    }
+    console.log("Withdrawal failed: Overdraft limit exceeded");
+    return false;
+  }
+}
+
+// Testing
+const savings = new SavingsAccount("SA123", 5000);
+savings.deposit(1000);
+savings.withdraw(1200);
+
+const checking = new CheckingAccount("CA456", 2000);
+checking.withdraw(2500);
+
+
 Exercise 2: Interface for Payment System
 
 Create an interface PaymentMethod with:
@@ -235,6 +293,81 @@ Tasks
 Implement PaymentMethod, CreditCard, DebitCard, and UPI
 
 Create instances and simulate payments & refunds
+
+Answer : 
+
+interface PaymentMethod {
+  pay(amount: number): void;
+  refund(amount: number): void;
+}
+
+class CreditCard implements PaymentMethod {
+  constructor(private balance: number) {}
+
+  pay(amount: number): void {
+    if (this.balance >= amount) {
+      this.balance -= amount;
+      console.log(`Paid ${amount} using Credit Card`);
+    } else {
+      console.log("Insufficient balance");
+    }
+  }
+
+  refund(amount: number): void {
+    this.balance += amount;
+    console.log(`Refunded ${amount} to Credit Card`);
+  }
+}
+
+class DebitCard implements PaymentMethod {
+  constructor(private balance: number) {}
+
+  pay(amount: number): void {
+    if (this.balance >= amount) {
+      this.balance -= amount;
+      console.log(`Paid ${amount} using Debit Card`);
+    } else {
+      console.log("Insufficient balance");
+    }
+  }
+
+  refund(amount: number): void {
+    this.balance += amount;
+    console.log(`Refunded ${amount} to Debit Card`);
+  }
+}
+
+class UPI implements PaymentMethod {
+  constructor(private balance: number) {}
+
+  pay(amount: number): void {
+    if (this.balance >= amount) {
+      this.balance -= amount;
+      console.log(`Paid ${amount} using UPI`);
+    } else {
+      console.log("Insufficient balance");
+    }
+  }
+
+  refund(amount: number): void {
+    this.balance += amount;
+    console.log(`Refunded ${amount} to UPI`);
+  }
+}
+
+// Testing
+const cc = new CreditCard(5000);
+cc.pay(1000);
+cc.refund(500);
+
+const dc = new DebitCard(3000);
+dc.pay(2000);
+dc.refund(1000);
+
+const upi = new UPI(2000);
+upi.pay(500);
+upi.refund(300);
+
 
 Exercise 3: Combining Abstract Class and Interface
 
@@ -286,4 +419,34 @@ Implement Loan, Insurance, and Customer
 
 Create an instance of Customer and test loan & insurance applications
 
- 
+ Answer : 
+
+interface Loan {
+  applyForLoan(amount: number): void;
+}
+
+interface Insurance {
+  applyForInsurance(policy: string): void;
+}
+
+class Customer implements Loan, Insurance {
+  private loans: number[] = [];
+  private policies: string[] = [];
+
+  applyForLoan(amount: number): void {
+    this.loans.push(amount);
+    console.log(`Applied for loan: ${amount}`);
+  }
+
+  applyForInsurance(policy: string): void {
+    this.policies.push(policy);
+    console.log(`Applied for insurance policy: ${policy}`);
+  }
+}
+
+// Testing
+const customer = new Customer();
+customer.applyForLoan(50000);
+customer.applyForInsurance("Health Insurance");
+
+
